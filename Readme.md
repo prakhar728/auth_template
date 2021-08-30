@@ -13,6 +13,7 @@ MERN STACK BASED.
 
 ## `http://localhost:3000/`
 
+<br />
 ### `/api/user/register` - Register the user. POST REQUEST
 
 Payload -  
@@ -35,3 +36,12 @@ Returns -
 String Type - JSON web Token - This has to be added to the headers as `auth-token`:JWT to make requests to private routes.
 
 If for any reason the JWT token is note present or can't be verified then a message `Access Denied` will be sent by the server.
+
+## ENV FILE
+
+The ENV file has two components
+1. `MONGO_URI` - Contains the URL to your Mongo database
+2. `TOKEN_SECRET` -  Contains the Secret token for JWT to use.
+
+The location of the .env file is in the server. So relative pathing from root folder will  be 
+'./server/.env' 
