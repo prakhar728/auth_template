@@ -14,6 +14,7 @@ MERN STACK BASED.
 ## `http://localhost:3000/`
 
 <br />
+
 ### `/api/user/register` - Register the user. POST REQUEST
 
 Payload -  
@@ -36,6 +37,17 @@ Returns -
 String Type - JSON web Token - This has to be added to the headers as `auth-token`:JWT to make requests to private routes.
 
 If for any reason the JWT token is note present or can't be verified then a message `Access Denied` will be sent by the server.
+
+### `api/user/changePassword` - Change password for the Email. POST REQUEST
+
+Payload - 
+* `email`: The email with which the user registered.
+* `password`:The new password to replace the old one.
+
+Returns - 
+Object that was created.
+
+
 
 ## ENV FILE
 
