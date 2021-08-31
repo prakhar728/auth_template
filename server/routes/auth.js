@@ -3,9 +3,9 @@ const User = require('../model/User');
 const {registerValidation,loginValidation} = require('../Validation');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-//VALIDATION
 
 
+//REGISTER THE USER
 router.post('/register', async (req, res) => {
 
     //VALIDATE
@@ -37,6 +37,8 @@ router.post('/register', async (req, res) => {
     }
 })
 
+
+//LOGIN THE USER WITH CREDENTIALS
 router.post('/login', async (req, res) => {
     const {error} =  loginValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -56,5 +58,22 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({_id:user._id},process.env.TOKEN_SECRET);
     res.header('auth-token',token).send(token);
 
+})
+
+//CHANGE USER PASSWORD
+
+router.post('/changePassword',async (req,res)=>{
+    const user = await User.findOne({email:req.body.email});
+    if(!user)
+    return res.status(400).send('Email id is not registered with us!')
+
+
+    //HASH PASSWORDS
+    const salt = await bcrypt.genSalt(10);  
+    const hashPassword = await bcrypt.hash(req.body.password,salt);
+
+    //UPDATE PASSWORD
+    const updatedPassword = await User.findOneAndUpdate({email:req.body.email},{password:hashPassword});
+    res.send(updatedPassword);
 })
 module.exports = router;
