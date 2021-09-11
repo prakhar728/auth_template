@@ -1,10 +1,10 @@
 //IMPORTING EXPRESS AND CREATING APP INSTANCE
 const express = require('express');
 const app = express();
-
+const cors= require('cors');
 //TELLING EXPRESS TO USE BODY PARSER
 app.use(express.json());
-
+app.use(cors());
 
 //DOTENV TO USE ENV FILES
 const dotenv = require('dotenv');
@@ -24,6 +24,6 @@ app.use('/api/user',authRoute);
 
 
 //SETTING THE PORT TO LISTEN
-app.listen(3000,()=>{
+app.listen(5000,()=>{
     console.log('App live on 3000')
 })
