@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import styles from './SignUp.module.css';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { KeyboardArrowRight } from '@material-ui/icons'
+import img1 from '../../Static/img1.png';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { postRegister } from '../../API/Index';
-
+import {Link} from 'react-router-dom';
 const SignUp = () => {
     const [Name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -13,77 +15,100 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data={
-            "Name":Name,
-            "email":email,
-            "password":password,
+        const data = {
+            "Name": Name,
+            "email": email,
+            "password": password,
         }
-        post
+        postRegister(data);
         console.log("Form Submited", Name, email, password, confirmPassword);
     }
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#811453'
+            }
+        }
+    });
+
     return (
-        <div>
-            <Typography
-                variant="h2"
-                color="textPrimary"
-                align="center"
-                className={styles.heading}
-            >
-                SIGN UP
-            </Typography>
-            <form noValidate autoComplete="off" onSubmit={handleSubmit} className={styles.form}>
+        <ThemeProvider theme={theme}>
+            <div className={styles.main}>
 
-                <TextField
-                    onChange={(e) => {
-                        setName(e.target.value)
-                    }}
-                    className={styles.field}
-                    label="Name"
-                    variant="outlined"
-                    color="primary"
-                    required
-                />
+                <form onSubmit={handleSubmit} noValidate autoComplete="off" className={styles.form}>
+                    <div className={styles.imageContainer}>
+                        <img src={img1} alt="DoodleSideImage" className={styles.image} />
+                    </div>
+                    <div className={styles.innerFormContainer}>
+                        <Typography
+                            variant="h5"
+                            color="inherit"
+                            align="center"
+                            className={styles.heading}
+                        >
+                            Create Account
+                        </Typography>
 
-                <TextField
-                    onChange={(e) => {
-                        setEmail(e.target.value)
-                    }}
-                    className={styles.field}
-                    label="Email"
-                    variant="outlined"
-                    color="primary"
-                    required
-                />
+                        <TextField
+                            variant="outlined"
+                            label="Name"
+                            color={theme.primary}
+                            className={styles.field}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
 
-                <TextField
-                    onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}
-                    className={styles.field}
-                    label="Password"
-                    variant="outlined"
-                    color="primary"
-                    required
-                />
+                        <TextField
+                            variant="outlined"
+                            className={styles.field}
+                            label="Email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            color="inherit"
+                            required
+                        />
+                        <TextField
+                            variant="outlined"
+                            className={styles.field}
+                            label="Password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            color="inherit"
+                            required
+                        />
+                        <TextField
+                            variant="outlined"
+                            className={styles.field}
+                            label="Confirm Password"
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            color="inherit"
+                            required
+                        />
+                        <div className={styles.buttonContainer}> 
+                        <Button
+                            type="Submit"
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            endIcon={<KeyboardArrowRight />}
+                            className={styles.Button}
+                        >
+                            REGISTER
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="outlined"
+                            color="primary"
+                            size="large"
+                            endIcon={<KeyboardArrowRight />}
+                            className={styles.Button}
+                        >
+                            <Link to="/signIn" className={styles.link}> LOG IN </Link>
+                        </Button>
+                        </div>
+                    </div>
 
-                <TextField
-                    onChange={(e) => {
-                        setConfirmPassword(e.target.value)
-                    }}
-                    className={styles.field}
-                    label="Confirm Password"
-                    variant="outlined"
-                    color="primary"
-                    required
-                />
-                <Button
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    endIcon={<KeyboardArrowRight />}
-                    className={styles.button}>LOGIN</Button>
-            </form>
-        </div>
+                </form>
+            </div>
+        </ThemeProvider>
     )
 }
 
