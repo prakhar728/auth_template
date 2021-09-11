@@ -16,7 +16,7 @@ const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
-            "Name": Name,
+            "name": Name,
             "email": email,
             "password": password,
         }
@@ -70,6 +70,7 @@ const SignUp = () => {
                             variant="outlined"
                             className={styles.field}
                             label="Password"
+                            type="password"
                             onChange={(e) => setPassword(e.target.value)}
                             color="inherit"
                             required
@@ -78,6 +79,8 @@ const SignUp = () => {
                             variant="outlined"
                             className={styles.field}
                             label="Confirm Password"
+                            type="password"
+
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             color="inherit"
                             required

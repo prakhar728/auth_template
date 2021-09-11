@@ -25,5 +25,5 @@ app.use('/api/user',authRoute);
 
 //SETTING THE PORT TO LISTEN
 app.listen(5000,()=>{
-    console.log('App live on 3000')
+    console.log('App live on 5000')
 })

@@ -54,6 +54,7 @@ const SignIn = () => {
                             variant="outlined"
                             className={styles.field}
                             label="Password"
+                            type="password"
                             onChange={(e) => setpassword(e.target.value)}
                             color="inherit"
                             required
